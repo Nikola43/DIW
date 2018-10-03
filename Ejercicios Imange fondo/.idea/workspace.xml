@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54dd04c7-2a37-4ba0-bcac-46ecb4e7571c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Ejercicio_Fondo_Imagen_2_Repeat_SIN.html" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicio_Fondo_Imagen_2_Repeat_SIN.html" afterDir="false" />
-    </list>
+    <list default="true" id="54dd04c7-2a37-4ba0-bcac-46ecb4e7571c" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,10 +15,10 @@
     <session id="-1847867438">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.23" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -130,11 +128,12 @@
       <updated>1538137268476</updated>
       <workItem from="1538137269741" duration="1751000" />
       <workItem from="1538392607792" duration="177000" />
+      <workItem from="1538558690411" duration="4000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1928000" />
+    <option name="totallyTimeSpent" value="1932000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
