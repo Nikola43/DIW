@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8"/>
+            <title>Ejercicio Menú Horizontal</title>
+            <style type="text/css">
+
+                /* Pon aquí tu css boncio */
+                /* menu lo de cada ul se se pone en horizontal */
+                .menuHorizontal ul {
+                    display: flex;
+                    padding: 0;
+                    margin: 0;
+                    list-style: none;
+                }
+
+                /*Submenu/ OCULTAMOS LOS LI*/
+                .menuHorizontal ul li ul{
+                    display: none;
+                }
+                /*poner un poco hacia el lado el 2submenu */
+                /*.menuHorizontal ul li{
+                    margin: 0 .5em 0 1em;
+                }*/
+
+                /*Enlaces de primer nivel los li primeros--dejamos ver solo los el primer nivel*/
+                .menuHorizontal > ul > li{
+                    display: block;
+                    margin: 0 .5em;/*arriba ,abajo , izquierda, derecha*/
+                    padding: 10px;
+                    font-size: 15px;
+                    background-color: aquamarine;
+                }
+
+                .menuHorizontal a{
+                    display: block;
+                    padding: 1em;
+                    background-color: blanchedalmond;/*color fondo menu y submenu*/
+                    text-decoration: none ;
+                    color: #336699;/*color de los enlaces*/
+                }
+                /*dandole a los ul un submenu */
+                .menuHorizontal a:hover{
+                    background-color: chartreuse;/*color cuando pinchas en el menu o sub menu*/
+                }
+
+                .menuHorizontal ul li a:hover + ul, .menuHorizontal ul li ul:hover{
+                    /*display: block;*/
+                    display: flex;
+                    position: absolute;
+                }
+                
+
+                /*dandole color y estilo al parrafo*/
+                p{
+                    border: dotted;
+                    border-color: aqua;
+                }
+
+            </style>
+        </head>
+<body>
+
+<nav class="menuHorizontal">
+    <ul>
+        <li>
+            <a href="#">Enalce UNO</a>
+            <ul>
+                <li><a href="#">Submenu1</a></li>
+                <li><a href="#">Submenu2</a></li>
+                <li><a href="#">Submenu3</a></li>
+                <li><a href="#">Submenu4</a></li>
+            </ul>
+        </li>
+
+
+        <li><a href="#">Enlace DOS</a></li>
+        <li>
+            <a href="#">Enlace TRES</a>
+            <ul>
+                <li><a href="">Submenu1</a></li>
+                <li><a href="">Submenu2</a></li>
+                <li><a href="">Submenu3</a></li>
+                <li><a href="">Submenu4</a>
+                    <ul>
+                        <li><a href="">Submenu1</a></li>
+                        <li><a href="">Submenu2</a></li>
+                        <li><a href="">Submenu3</a></li>
+                        <li><a href="">Submenu4</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+        <li><a href="#">Enlace CUATRO</a></li>
+    </ul>
+</nav>
+
+<p>
+    En este ejemplo, dejamos que el ul y el enlace (a) floten a la izquierda.
+    Los elementos li se muestran como elementos en línea.
+    Esto hace que la lista esté en una línea.
+    El elemento ul tiene una anchura de 100% y cada enlace en la lista NO tiene anchura (auto).
+    Añadimos algunos colores y bordes para que sea más elegante.
+</p>
+
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
