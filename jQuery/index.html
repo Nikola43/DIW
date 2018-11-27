@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("div").click(function(){
+                $(this).fadeOut(400);
+                $(this).css("color", "red");
+                $(this).show();
+            });
+        });
+    </script>
+</head>
+<body>
+<div>1. Pulsa para ocultar</div>
+<div>2. Pulsa para ocultar</div>
+</body>
+</html>
