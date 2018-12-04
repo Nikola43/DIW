@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalación Servidor PHP Linux</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="apache.html">Apache</a></li>
+        <li><a href="nginx.html">Nginx</a></li>
+        <li><a href="lighttpd.html">Lighttpd</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <section class="contenido principal">
+        <h1>¿Que es PHP?</h1>
+        <h2>PHP</h2>
+        <p class="normal">
+            PHP (acrónimo recursivo de PHP: Hypertext Preprocessor) es un lenguaje de código abierto muy popular
+            especialmente adecuado para el desarrollo web y que puede ser incrustado en HTML.
+        </p>
+
+        <h2>¿Cómo funciona?</h2>
+        <p class="normal">
+            En lugar de usar muchos comandos para mostrar HTML (como en C o en Perl), las páginas de PHP contienen HTML
+            con código incrustado que hace "algo" (en este caso, mostrar "¡Hola, soy un script de PHP!). El código de
+            PHP está encerrado entre las etiquetas especiales de comienzo y final que permiten entrar
+            y salir del "modo PHP".
+        </p>
+
+        <h2>Características</h2>
+        <p class="normal">
+            Lo que distingue a PHP de algo del lado del cliente como Javascript es que el código es ejecutado en el
+            servidor, generando HTML y enviándolo al cliente. El cliente recibirá el resultado de ejecutar el script,
+            aunque no se sabrá el código subyacente que era. El servidor web puede ser configurado incluso para que
+            procese todos los ficheros HTML con PHP, por lo que no hay manera de que los usuarios puedan saber qué se
+            tiene debajo de la manga.
+        </p>
+
+        <h1>Características del servidor</h1>
+        <p class="normal">
+            Se va a instalar el servidor apache en un ordenador con la siguiente configuración:
+        </p>
+
+        <ul>
+            <li>CPU: Intel I3</li>
+            <li>RAM: 8GB RAM DDR3</li>
+            <li>GPU: Nvidia GeForce 720</li>
+            <li>SO: Ubuntu 18.04 LTS</li>
+        </ul>
+
+        <h1>Instalación Servidor PHP</h1>
+        <h2>Instalación</h2>
+        <p class="normal">
+            En ubuntu 18 primero debemos instalar php con el siguiente comando:
+        </p>
+        <code>$ sudo apt install php -y</code>
+
+        <p class="normal">
+            Al terminar, debemos ejecutar:
+        </p>
+        <code>$ php -v</code>
+
+        <p class="normal">
+            Debemos obtener un resultado como este:
+        </p>
+        <div class="contenedor_imagen_codigo">
+            <img src="images/version_php.png" alt="Ejecucion php -v">
+        </div>
+
+        <p class="normal">
+            !Ya tenemos el servidor listo para ejecutar código PHP¡
+        </p>
+
+        <h1>Configurando la web del servidor</h1>
+        <h2>Eliminamos la web de instalación</h2>
+        <p class="normal">
+            Por defecto la ruta donde se alojan las páginas web es: /var/www/html/
+            Para eliminarla ejecutamos el siguiente comando:
+        </p>
+        <code>$ sudo rm -rf /var/www/html/* </code>
+
+        <h2>Creación código de prueba</h2>
+        <p class="normal">
+            Una vez hemos borrado la web de instalación, necesitamos crear una web que contenga código PHP para ver
+            si nuestro servidor puede ejecutarlo, la ruta por defecto es /var/www/html/
+        </p>
+        <code>$ sudo vim /var/www/html/index.php</code>
+
+        <p class="normal">
+            Y le insertamos el siguiente codigo:
+        </p>
+        <div class="contenedor_imagen_codigo">
+            <img src="images/codigo_prueba_php.png" alt="Ejecucion apache2 -v">
+        </div>
+        <p class="normal">
+            Guardamos el fichero, y ya tenemos la web para probar los distintos servidores
+        </p>
+    </section>
+
+    <section class="contenido secundario">
+        <h1>Ejecución del metodo phpinfo()</h1>
+        <div class="contenedor_imagen">
+            <img id="phpinfo" src="images/prueba_php_info.png" alt="Ejecucion del metodo phpinfo()">
+        </div>
+        <p class="centrado">
+            Muy usado para comprobar si php funciona, devuelve información sobre la versión de php
+            que se está ejecutando en el servidor
+        </p>
+    </section>
+</div>
+<footer class="footer">
+    <p class="">Paulo Soares Teixeira</p>
+    <div id="redes">
+        <a href="https://github.com/Nikola43">
+            <img width="50" height="50" src="images/icon_github.png">
+        </a>
+        <a href="https://plus.google.com/109842447190217448309">
+            <img width="50" height="50" src="images/icon_google-plus.png">
+        </a>
+        <a href="https://es.linkedin.com/in/paulo-gustavo-soares-teixeira-7a4332120">
+            <img width="50" height="50" src="images/icon_linkedin.png">
+        </a>
+    </div>
+</footer>
+
+<script>
+
+    var modal = document.getElementById('modal_imagenes');
+    var img = document.getElementById('phpinfo');
+    var imagenModal = document.getElementById("imagen_modal");
+    var texto = document.getElementById("texto_modal");
+    var span = document.getElementsByClassName("cerrar_modal")[0];
+
+    // Mostramos el modal cuando se hace click en la imagen
+    img.onclick = function () {
+        modal.style.display = "block";
+        imagenModal.src = this.src;
+        texto.innerHTML = this.alt;
+    };
+
+    // Lo ocultamos cuando se pulsa en la X
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>
+
+</body>
+</html>

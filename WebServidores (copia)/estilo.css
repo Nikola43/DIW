@@ -1,0 +1,352 @@
+
+body
+{
+
+    background-color: #cfe6ef;
+}
+
+code {
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+nav
+{
+    /* Posicionamiento */
+    position: relative;
+    padding: 1px;
+    margin: 1px;
+    text-align: center;
+
+    /* Estética */
+    font-size:20px;
+    color: white;
+    background-color: #126A8E;
+
+    /* Sombra */
+    border: 1px solid #bbb;
+    -webkit-box-shadow: 5px 3px 10px 0 #aaa;
+    box-shadow: 5px 3px 10px 0 #aaa;
+
+    /* Redondeado de bordes */
+    border-radius: 15px;
+}
+
+section ul li {
+    font-style: normal;
+    color : #000000;
+    font-family: Times, serif;
+    font-size: 18px;
+    text-align: left;
+    word-spacing: inherit;
+    word-wrap: break-word;
+    max-width:90%;
+    width:90%;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+nav ul li
+{
+    display: inline; /* Hacer menu horizontal*/
+}
+
+nav  ul li a
+{
+    /* Posicionamiento */
+    position: relative;
+    margin: 1%;
+    padding: 1%;
+
+    /* Estética */
+    font-family: Times, serif;
+    font-size:25px;
+    text-decoration: none; /* Elimina el subrayado del menu */
+    font-weight: bold;
+    color: white;
+}
+
+nav ul li a:hover
+{
+    /* Estética */
+    background-color: #57a5e3;
+    border-radius:50%;
+
+    /* Comportamiento */
+    transition:all 0.4s ease;
+}
+
+h1
+{
+    /* Posicionamiento */
+    margin: 10px;
+    padding: 10px;
+
+    /* Estética */
+    font-family: Times, serif;
+    font-size:25px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background: #57a5e3;
+    text-decoration: underline;
+
+    /* Sombra */
+    -webkit-box-shadow: 5px 3px 10px 0 #aaa;
+    box-shadow: 5px 3px 10px 0 #aaa;
+}
+
+h2
+{
+    color: #126A8E;
+    font-family: Times, serif;
+    text-align: left;
+    font-weight: bold;
+    font-size:20px;
+    margin-left: 10px;
+}
+
+p.normal
+{
+    font-style: normal;
+    color : #000000;
+    font-family: Times, serif;
+    font-size: 18px;
+    text-align: left;
+    word-spacing: inherit;
+    word-wrap: break-word;
+    max-width:90%;
+    width:90%;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+p.centrado
+{
+    font-style: normal;
+    color : black;
+    font-family: "Times New Roman", serif;
+    font-size: 18px;
+    margin: 1% 3% 1% 3%;
+    word-spacing: inherit;
+    word-wrap: break-word;
+    max-width:90%;
+    width:90%;
+    text-align: center;
+}
+
+.contenedor
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px auto;
+
+    /* Posicionamiento */
+    width: 98%;
+
+    /* Estética */
+    /* Sombra */
+    background-color: #fff;
+    border: 1px solid #bbb;
+    -webkit-box-shadow: 5px 3px 10px 0 #aaa;
+    box-shadow: 5px 3px 10px 0 #aaa;
+
+    /* Redondeado de bordes */
+    border-radius: 15px;
+}
+
+.contenido {
+    /* Dimensiones */
+    width: 100%;
+    height: 100%;
+
+    /* Márgenes */
+    margin: 10px;
+    padding: 10px;
+
+    /* Estética */
+    /* Sombra */
+    background-color: #fff;
+    border: 1px solid #bbb;
+    -webkit-box-shadow: 5px 3px 10px 0 #aaa;
+    box-shadow: 5px 3px 10px 0 #aaa;
+
+    /* Redondeado de bordes */
+    border-radius: 15px;
+}
+
+.principal {
+    /* Dimensiones */
+    width: 60%;
+}
+
+.secundario
+{
+    /* Dimensiones */
+    width: 35%;
+}
+
+.footer
+{
+    /* Posicionamiento */
+    position: relative;
+    clear: both;
+    padding: 2%;
+    margin-top: 2%;
+    text-align: center;
+
+    /* Estética */
+    font-size:20px;
+    color: white;
+    background-color: #126A8E;
+}
+
+
+
+.contenedor_imagen img
+{
+    width: 100%;
+    height: 100%;
+
+    /* Estética */
+    /* Sombra */
+    background-color: #fff;
+    border: 1px solid #bbb;
+    -webkit-box-shadow: 5px 3px 10px 0 #aaa;
+    box-shadow: 5px 3px 10px 0 #aaa;
+
+    /* Redondeado de bordes */
+    border-radius: 15px;
+}
+
+.contenedor_imagen_codigo img
+{
+    width: 98%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+
+
+
+
+
+    /* Estética */
+    /* Sombra */
+    background-color: #fff;
+    border: 1px solid #bbb;
+    -webkit-box-shadow: 5px 3px 10px 0 #aaa;
+    box-shadow: 5px 3px 10px 0 #aaa;
+
+    /* Redondeado de bordes */
+    border-radius: 15px;
+}
+
+
+
+
+
+
+#modal_imagenes {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Caption of Modal Image */
+#texto_modal {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Fondo del modal */
+.modal {
+    /* Posicionamiento */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Comportamiento */
+    display: none;   /* oculto por defecto */
+    position: fixed; /* posicion relativa a la ventana del navegador */
+    z-index: 1;      /* lo situamos arriba de la ventana */
+    overflow: auto;  /* Habilitar scroll si es necesario */
+
+    /* Estética */
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Contenido del modal */
+.contenido_modal {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Animación de zoom */
+.contenido_modal, .texto_modal {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.cerrar_modal {
+    /* Posicionamiento */
+    position: absolute;
+    top: 15px;
+    right: 35px;
+
+    /* Comportamiento */
+    transition: 0.3s;
+
+    /* Estética */
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.cerrar_modal:hover, .cerrar_modal:focus {
+    /* Estética */
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Establecemos el tamaño de la imagen al 100% en pantallas pequeñas */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+/* Establecemos el tamaño de la imagen al 100% en pantallas pequeñas */
+@media only screen and (max-width: 1750px){
+    .principal
+    {
+        width: 98%;
+    }
+    .secundario
+    {
+        width: 60%;
+    }
+}

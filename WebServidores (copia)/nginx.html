@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Instalación Servidor PHP Linux</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="apache.html">Apache</a></li>
+        <li><a href="nginx.html">Nginx</a></li>
+        <li><a href="lighttpd.html">Lighttpd</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <section class="contenido principal">
+        <h1>1. Instalación Servidor nginx</h1>
+        <h2>Instalación</h2>
+        <p class="normal">
+            Debemos abrir el terminal y ejecutar el siguiente comando:
+        </p>
+        <code>$ sudo apt install nginx -y</code>
+
+        <p class="normal">
+            Al terminar, comprobamos que se ha instalado correctamente con el siguiente comando:
+        </p>
+        <code>$ nginx -v</code>
+
+        <p class="normal">
+            Debemos obtener un resultado como este:
+        </p>
+        <div class="contenedor_imagen_codigo">
+            <img src="images/version_nginx.png" alt="Ejecucion nginx -v">
+        </div>
+
+        <p class="normal">
+            Ahora iniciamos el servidor con el siguiente comando:
+        </p>
+        <code>$ sudo service nginx start</code>
+        <p class="normal">
+            Comprobamos si el servidor esta funcionando con el siguiente comando:
+        </p>
+        <code>$ sudo service nginx status</code>
+        <div class="contenedor_imagen_codigo">
+            <img src="images/estado_apache2.png" alt="Ejecucion nginx -v">
+        </div>
+    </section>
+
+
+    <section class="contenido principal">
+        <h1>Configurando el servidor</h1>
+        <h2>Permitir ejecución de ficheros .php</h2>
+
+        <p class="normal">
+            Ahora mismo si intentamos entrar en la web del servidor, nos dará como respuesta '403 Forbbiden'
+            ya que el servidor no permite la ejecución de ficheros .php. Para habilitar la ejecución de codigo php,
+            debemos editar el fichero /etc/nginx/sites-enabled/default
+        </p>
+        <p class="normal">
+            Para editar el fichero usamos el siguiente comando:
+        </p>
+        <code>$ sudo vim /etc/nginx/sites-enabled/default</code>
+        <p class="normal">
+            Debemos añadir index.php al final de la lista de ficheros admitidos.
+        </p>
+        <div class="contenedor_imagen_codigo">
+            <img src="images/configuracion_nginx.png" alt="web apache">
+        </div>
+        <p class="normal">
+            Guardamos el fichero y reiniciamos el servidor con el siguiente comando:
+        </p>
+        <code>$ sudo service nginx restart</code>
+    </section>
+
+    <section class="contenido principal">
+        <h1>Probando el servidor</h1>
+        <h2>Prueba en el navegador</h2>
+
+        <p class="normal">
+            Abrimos el navegador y vamos a la dirección
+            <a href="#">http://localhost/</a>. Si todo ha ido bien, debería mostrar la web.
+        </p>
+        <div class="contenedor_imagen_codigo">
+            <img src="images/prueba_php.png" alt="web apache">
+        </div>
+        <p class="normal">
+            Como se puede observar, el servidor genera una web html mostrando la version de php instalada.
+        </p>
+    </section>
+</div>
+
+<footer class="footer">
+    <p class="">Paulo Soares Teixeira</p>
+    <div id="redes">
+        <a href="https://twitter.com/nikolateslafeed?lang=es">
+            <img width="50" height="50" src="images/galeria/twitter.png">
+        </a>
+        <a href="https://www.facebook.com/369TESLA/">
+            <img width="50" height="50" src="images/galeria/facebook.png">
+        </a>
+        <a href="https://plus.google.com/communities/112539568895165640662">
+            <img width="50" height="50" src="images/galeria/google.png">
+        </a>
+    </div>
+</footer>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
