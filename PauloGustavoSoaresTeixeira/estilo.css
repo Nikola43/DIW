@@ -167,7 +167,7 @@ p.centrado
     margin: 5px auto;
 
     /* Posicionamiento */
-    width: 80%;
+    width: 90%;
 
     /* Estética */
     /* Sombra */
@@ -209,7 +209,7 @@ p.centrado
 .secundario
 {
     /* Dimensiones */
-    width: 30%;
+    width: 35%;
 }
 
 .contenedor_imagen img
