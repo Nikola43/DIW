@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>V4_EDITAR.</title>
+    <!--jQuery-ui-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+    <style>
+        
+        label, input { display:block; }
+        input.text { margin-bottom:12px; width:95%; padding: .4em; }
+        fieldset { padding:0; border:0; margin-top:25px; }
+        /*
+        h2 { font-size: 1.2em; margin: .6em 0; }
+        div#registroUsuarios { width: 350px; margin: 20px 0; }
+        div#registroUsuarios table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+        div#registroUsuarios table td, div#registroUsuarios table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+        .ui-dialog .ui-state-error { padding: .3em; }
+        */
+    </style>
+
+    <script type="text/javascript"> </script>
+    <script src="jquery-3.3.1.min.js"> </script>
+    <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"> </script>
+   
+
+    <style type="text/css">
+        #dialogoFormularioAnadir{
+            display: none;
+        }
+
+        #dialogoFormularioModificar{
+            display: none;
+        }
+    </style>
+    <script> 
+        //################# WINDOW.ONLOAD ################//
+            $(function(){
+                cargarTabla();
+                $("#btAnade").click(dialogoAnadePersona);
+                //$("#btBorrar").click(borraPersona);
+            })
+
+        //################################################//
+        //                   1. LISTAR                    //
+        //################################################//
+        //--1. Enviamos la petición al servidor.
+            function cargarTabla(){
+                //console.log("llega");
+                $.ajax({
+                    url: "servidor.php",
+                    type: "post",
+                    data: JSON.stringify({servicio: "listar"}),
+                    dataType: "json",
+                    success: MuestraPersonas,
+                    error: function(res){
+                        alert("Ha habido un error: " + JSON.stringify(res));
+                    }
+                });
+            }
+
+
+            function MuestraPersonas(datos){
+                console.log(datos);
+                $("#filas_tablas").html("");
+                Llena_Tabla(datos,$("#filas_tablas"));
+            }
+
+
+            function Crea_FIla(aCol){
+                var fila = $("<tr>");
+                var col;
+                for (var i in aCol){
+                    col = $("<td>", {
+                        "html": aCol[i]
+                    });
+                    fila.append(col);
+                }
+                //creamos el boton borrar
+                var boton = $("<button>", {"html": "X"});
+                boton.data("id", aCol.ID);
+                boton.data("nombreC", aCol.NOMBRE +" "+ aCol.APELLIDOS);
+                fila.append($("<td>").append(boton));
+
+                //Creamos el botón editar.
+                var botonEditar = $("<button>", {"html": "Editar"});
+                botonEditar.data("id", aCol.ID);
+                botonEditar.data("nombreC", aCol.NOMBRE +" "+ aCol.APELLIDOS);
+                fila.append($("<td>").append(botonEditar));
+
+                //Tambien se puede hacer aqui (darle funcionalidad al botón "X").
+                boton.click(dialogoBorraPersona);
+                botonEditar.click(editaPersona);
+
+                return fila;
+            }
+
+
+
+            function Llena_Tabla(rs, cuerpoTabla){
+                var fila;
+                for (var i=0; i<rs.length; i++){
+                    fila = Crea_FIla(rs[i]);
+                    cuerpoTabla.append(fila);
+                }
+                //Le damos funionalidad al botón "X"
+                //cuerpoTabla.find("button").click(borraPersona);
+            } 
+
+
+        //################################################//
+        //                   2. AÑADIR                    //
+        //################################################//
+        //--1. Añade a la persona a la tabla.
+            function anadePersona(){
+                //recojo los datos (val es value)
+                var datos ={
+                    servicio:"insertar",
+                    dni: $("#dni").val(),
+                    nombre: $("#nombre").val(),
+                    apellidos: $("#apellidos").val()
+                };
+
+                console.log(datos);
+
+                 $.ajax({
+                    url: "servidor.php",
+                    type: "post",
+                    data: JSON.stringify(datos),
+                    dataType: "json",
+                    success: MuestraPersonas,
+                    error: function(res){
+                        alert("Ha habido un error: " + JSON.stringify(res));
+                    }
+                });      
+            }
+
+            //--2. Diálogo que añade a la persona a la tabla.
+            function dialogoAnadePersona(){
+                $( "#dialogoFormularioAnadir" ).dialog({
+                    width:600,
+                    height:400,
+                   //  autoOpen: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000
+                    },
+                    buttons:{
+                        "Añadir": function(){
+                            anadePersona(),
+                            $(this).dialog("close");
+                        },
+                        Cancelar: function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            }
+
+
+            //################################################//
+            //                   3. BORRAR                    //
+            //################################################//
+            //--1. Elimina a la persona de la tabla.
+                function borraPersona(idPersona){
+                    //--alert(idPersona);
+                    //recojo los datos (val es value)
+                    var datos ={
+                        servicio:"borrar",
+                        id: idPersona
+                    };
+
+                    console.log(datos);
+                    $.ajax({
+                        url: "servidor.php",
+                        type: "post",
+                        data: JSON.stringify(datos),
+                        dataType: "json",
+                        success: MuestraPersonas,
+                        error: function(res){
+                            alert("Ha habido un error: " + JSON.stringify(res));
+                        }
+                    });      
+                }
+        
+            //--2. Diálogo que elimina  a la persona de la tabla.
+                function dialogoBorraPersona(){
+                    var id= $(this).data("id");
+                    var nombreUsuaro= $(this).data("nombreC");
+                    $("#mensaje").html("¿Desea eliminar a: '" +nombreUsuaro+ " '?");
+
+                    //alert(id);
+                    $("#teDejoBorrarPersona").dialog({
+                        resizable: false,  //--el usuario no puede cambiar el tamaño del diálogo.
+                        height: "auto",
+                        width: 400,
+                        modal: true,
+                        show: {
+                            effect: "slake", //--blind
+                            duration: 500
+                        },
+                        hide: {
+                            effect: "explode",
+                            duration: 100
+                        },
+                        buttons: {
+                            "Si, me cae mal": function(){ //--si el nombre del boton tiene espacios en blanco hay que ponerlo entre comillas.
+                                borraPersona(id),
+                                $(this).dialog("close");
+                            },
+                            Cancelar: function(){
+                                $(this).dialog("close");
+                            }
+                        }
+                    });    
+                }
+
+
+            //################################################//
+            //                   4. EDITAR                    //
+            //################################################//
+            //--1. Modifica los datos de la persona.
+                function modificaPersona(){
+                    datos={
+                        servicio: "modificar",
+                        dni: $("#dniMod").val(),
+                        nombre: $("#nombreMod").val(),
+                        apellidos: $("#apellidosMod").val(),
+                        id: $("#dniMod").data("id")
+                    }
+
+                    $.ajax({
+                        url: "servidor.php",
+                        type: "post",
+                        data: JSON.stringify(datos),
+                        dataType: "json",
+                        success: MuestraPersonas,
+                        error: function(res){
+                            alert("Ha habido un error: " + JSON.stringify(res));
+                        }
+                    });      
+                }
+
+                function editaPersona(){
+                    //Pedimos los datos de la persona
+                    var idP= $(this).data("id");
+                    var datos ={
+                        servicio:"selPersonaID",
+                        id: idP
+                    };
+
+                    console.log(datos);
+                    $.ajax({
+                        url: "servidor.php",
+                        type: "post",
+                        data: JSON.stringify(datos),
+                        dataType: "json",
+                        success: function(persona){
+                            console.log(persona);
+                            //Rellenamos el formulario con los datos de la persona.
+                            $("#dniMod").val(persona.DNI);
+                            $("#dniMod").data("id", idP);        //--Le pasamos el id del ue queremos modificar...
+                            $("#nombreMod").val(persona.NOMBRE); //--..data-atributo id en el campo dni.
+                            $("#apellidosMod").val(persona.APELLIDOS);
+                            dialogoEditaPersona();
+                        },
+                        error: function(res){
+                            alert("Ha habido un error: " + JSON.stringify(res));
+                        }
+                    });      
+                }
+
+            //--2. Diálogo que modifica  a la persona.
+                function dialogoEditaPersona(){
+                    var id= $(this).data("id");
+                    //alert(id);
+                    $("#dialogoFormularioModificar").dialog({
+                        resizable: false,
+                        height: "auto",
+                        width: 400,
+                        modal: true,
+                        show: {
+                            effect: "slake",
+                            duration: 500
+                        },
+                        hide: {
+                            effect: "explode",
+                            duration: 100
+                        },
+                        buttons: {
+                            "Modificar": function(){
+                                modificaPersona(),
+                                $(this).dialog("close");
+                            },
+                            Cancelar: function(){
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                }
+    </script> 
+</head>
+<body>
+    <!--########### DIÁLOGO 1: BORRA PERSONA. ###########-->
+    <div id="teDejoBorrarPersona" title="Borrar Usuario.">
+        <p id="mensaje"></p>
+        <!-- <p><span id="mensaje">¿Desea eliminar a....? </span></p> -->
+    </div>
+
+    <!--########### DIÁLOGO 2: AÑADE PERSONA. ###########-->
+    <div id="dialogoFormularioAnadir" title="Crear Nuevo Usuario.">
+        <form class="f1" name="formAniadir">
+            <fieldset>
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" size="10" maxlength="9" />
+    
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" />
+    
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" size="25" />
+                <br><br>
+                <!--
+                <input class="btn" type="submit" value="Añadir." />
+                <input class="btn1" type="submit" value="Cancelar." />
+                -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
+
+    <!--########### DIÁLOGO 3: MODIFICA PERSONA. ###########-->
+    <div id="dialogoFormularioModificar" title="Modificar Usuario.">
+        <form class="f2" name="formModificar">
+            <fieldset>
+                <label for="dni">DNI:</label>
+                <input type="text" id="dniMod" size="10" maxlength="9" />
+    
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombreMod" />
+    
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidosMod" size="25" />
+                <br><br>
+                <!--
+                <input class="btn" type="submit" value="Añadir." />
+                <input class="btn1" type="submit" value="Cancelar." />
+                -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
+
+    <!--############ TABLA ############-->
+    <div id="registroUsuarios">
+        <h2>Registro de Usuarios.</h2>
+
+        <table id="tablas_personas" border="1">
+            <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>NOMBRE</th>
+                <th>APELLIDOS</th>
+                <th>BORRAR</th>
+                <th>EDITAR</th>
+            </tr>
+
+            <tbody id="filas_tablas">
+            </tbody>
+        </table>
+    </div>
+
+    <br><br>
+        <input type="button" value="AÑADIR" id="btAnade">
+        <!--  <input type="button" value="BORRAR" id="btBorrar">  -->
+
+</body>
+</html>

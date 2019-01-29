@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, mininum-scale=1.0, maxinum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>V1_LISTAR.</title>
+
+    <!--Links-->
+    <link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="theme/themes/tema-azulito.min.css"/>
+
+    <!--Script-->
+    <script src="js/jquery.min.js"></script>                  <!--Libreria jQuery-->
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>     <!--Libreria jQuery Mobile-->
+
+    <!--Estilos-->
+    <style>
+        .estilo_Tabla_1 {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            width: 70%;
+            border-collapse: collapse;
+        }
+
+        .estilo_Tabla_1 td {
+            font-size: 1em;
+            border: 1px solid #98bf21;
+            padding: 4px;
+        }
+
+        .estilo_Tabla_1 th {
+            border: 1px solid #98bf21;
+            font-size: 1.2em;
+            padding: 5px;
+            background-color: #A7C942;
+            color: #ffffff;
+        }
+
+        .estilo_Tabla_1 tr td {
+            color: #000000;
+
+            background-color: #EAF2D3;
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px;
+        }
+
+        #noMostrar {
+            display: none;
+            padding-top: 2px !important;
+            padding-bottom: 2px !important;
+        }
+    </style>
+    <script>
+        //############ WINDOW.ONLOAD ############//
+        $(document).on("mobileinit", function () {
+            $.mobile.defaultPageTransition = "slide";
+        });
+
+        $(function () {
+            cargarTabla();
+            $("#btInsertar").click(insertarPersona);
+        });
+
+
+        //--1. Enviamos la petición al servidor.
+        function cargarTabla() {
+            $.ajax({
+                url: "servidor.php",
+                type: "post",
+                data: JSON.stringify({servicio: "listar"}),
+                dataType: "json",
+                success: MuestraPersonas,
+                error: function (res) {
+                    alert("Ha habido un error: " + JSON.stringify(res));
+                }
+            });
+        }
+
+
+        function MuestraPersonas(datos) {
+            $("#filas_tablas").html("");
+            Llena_Tabla(datos, $("#filas_tablas"));
+        }
+
+
+        function Crea_FIla(aCol, tipo) {
+            var fila = $("<tr>");
+            var col;
+            for (var i in aCol) {
+                col = $("<td>", {
+                    "html": aCol[i]
+                });
+                fila.append(col);
+            }
+
+            var td = $("<td>");
+            boton = $("#noMostrar").clone(true);
+            boton.button().button("refresh");
+            boton.show();
+            td.append(boton);
+            boton.data("id", aCol.ID);
+            fila.append(td);
+
+            return fila;
+        }
+
+
+        function Llena_Tabla(datos, detalle) {
+            datos.forEach(function (fila) {      //fila: es cada uno de los elementos del array.
+                detalle.append(Crea_FIla(fila));
+            });
+        }
+
+        function insertarPersona() {
+            let datos = {
+                servicio: "insertar",
+                dni: $("#text-dni").val(),
+                nombre: $("#text-nombre").val(),
+                apellidos: $("#text-apellidos").val()
+            };
+
+            $.ajax({
+                url: "servidor.php",
+                type: "post",
+                data: JSON.stringify(datos),
+                dataType: "json",
+                success: MuestraPersonas,
+                error: (res) => alert("Ha habido un error: " + JSON.stringify(res))
+            });
+        }
+    </script>
+
+</head>
+<body>
+<!--Página Principal.-->
+<div data-role="page" id="pPrincipal">
+    <!--header-->
+    <div data-role="header">
+        <h2>Lista Personas.</h2>
+    </div>
+    <!--/header-->
+
+    <!--content-->
+    <div data-role="main" class="ui-content">
+        <a id="noMostrar" href="#pPersonas" data-role="button" data-icon="edit" data-theme="a">Modificar.</a>
+
+        <table id="tablas_personas" class="estilo_Tabla_1 center">
+            <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>NOMBRE</th>
+                <th>APELLIDOS</th>
+                <th>MODIFICAR</th>
+            </tr>
+            <tbody id="filas_tablas">
+            </tbody>
+        </table>
+        <br><br>
+        <a id="btAnade" href="#pPersonas" data-role="button" data-icon="plus" data-theme="a">Añadir</a>
+    </div>
+    <!--/content-->
+
+    <!--footer-->
+    <div data-role="footer">
+        <h4>Conócenos.</h4>
+    </div>
+    <!--/footer-->
+</div>
+<!--/Página Principal.-->
+
+<!-- Modificar Persona -->
+<div data-role="page" id="pPersonas">
+    <!--header-->
+    <div data-role="header">
+        <h2>Modificar Personas</h2>
+    </div>
+    <!--/header-->
+
+    <!--content-->
+    <div data-role="main" class="ui-content">
+        <form>
+            <!--DNI-->
+            <label for="text-dni">DNI</label>
+            <input type="text" name="text-dni" id="text-dni" value="">
+
+            <!--NOMBRE-->
+            <label for="text-nombre">NOMBRE</label>
+            <input type="text" name="text-nombre" id="text-nombre" value="">
+
+            <!--APELLIDOS-->
+            <label for="text-apellidos">APELLIDOS</label>
+            <input type="text" name="text-apellidos" id="text-apellidos" value="">
+
+            <!-- BOTON AÑADIR -->
+            <a id="btInsertar" href="" data-role="button" data-icon="plus" data-theme="a" data-rel="back">Insertar</a>
+            <a id="btBack" href="" data-role="button" data-icon="back" data-theme="a" data-rel="back">Volver</a>
+        </form>
+    </div>
+    <!--/content-->
+
+    <!--footer-->
+
+    <!--/footer-->
+</div>
+<!-- Modificar Persona -->
+</body>
+</html>
