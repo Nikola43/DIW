@@ -64,9 +64,18 @@
 
         $(function () {
             cargarTabla();
-            $("#btInsertar").click(insertarPersona);
-        });
+            $("#btInsertar").click(function () {
+                insertarPersona();
+            });
 
+            $("#noMostrar").click(function () {
+                $("#btInsertar").text("Modificar");
+            });
+
+            $("#btAnade").click(function () {
+                $("#btInsertar").text("Insertar");
+            });
+        });
 
         //--1. Enviamos la petición al servidor.
         function cargarTabla() {
@@ -100,7 +109,7 @@
             }
 
             var td = $("<td>");
-            boton = $("#noMostrar").clone(true);
+            var boton = $("#noMostrar").clone(true);
             boton.button().button("refresh");
             boton.show();
             td.append(boton);
@@ -109,7 +118,6 @@
 
             return fila;
         }
-
 
         function Llena_Tabla(datos, detalle) {
             datos.forEach(function (fila) {      //fila: es cada uno de los elementos del array.
@@ -134,6 +142,30 @@
                 error: (res) => alert("Ha habido un error: " + JSON.stringify(res))
             });
         }
+
+        function modificaPersona() {
+            let datos = {
+                servicio: "modificar",
+                dni: $("#text-dni").val(),
+                nombre: $("#text-nombre").val(),
+                apellidos: $("#text-apellidos").val(),
+                id: $("#text-dni").data("id")
+            };
+
+            /*
+            $.ajax({
+                url: "servidor.php",
+                type: "post",
+                data: JSON.stringify(datos),
+                dataType: "json",
+                success: MuestraPersonas,
+                error: function (res) {
+                    alert("Ha habido un error: " + JSON.stringify(res));
+                }
+            });
+            */
+        }
+
     </script>
 
 </head>
